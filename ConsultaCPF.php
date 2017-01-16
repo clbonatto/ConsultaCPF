@@ -69,7 +69,7 @@ class ConsultaCPF {
 	public static function consulta($cpf, $data_nascimento, $captcha, $stringCookie) {
 		$arrayCookie = explode(';', $stringCookie);
 
-		$ch = curl_init("https://www.receita.fazenda.gov.br/Aplicacoes/SSL/ATCTA/CPF/ConsultaPublicaExibir.asp");
+		$ch = curl_init("https://www.receita.fazenda.gov.br/Aplicacoes/SSL/ATCTA/CPF/ConsultaSituacao/ConsultaPublicaExibir.asp");
 
 		$param = array(
 			'tempTxtCPF' => $cpf,
@@ -107,9 +107,9 @@ class ConsultaCPF {
 
 		\phpQuery::newDocumentHTML($html, $charset = 'utf-8');
 
-		$class_dados = pq('#F_Consultar > div > div.caixaConteudo > div > div:nth-child(3) > p > span.clConteudoDados');
+		$class_dados =       pq('#F_Consultar > div.divMiolo > div.caixaConteudo > div > #mainComp > div.clConteudoEsquerda > p > span.clConteudoDados');
 
-		$class_complemento = pq('#F_Consultar > div > div.caixaConteudo > div > div:nth-child(4) > p > span.clConteudoComp');
+		$class_complemento = pq('#F_Consultar > div.divMiolo > div.caixaConteudo > div > #mainComp > div.clConteudoEsquerda > p > span.clConteudoComp');
 
 		$result = array();
 		foreach ($class_dados as $clConteudoDados){
